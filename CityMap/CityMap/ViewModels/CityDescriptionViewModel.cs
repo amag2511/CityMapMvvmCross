@@ -1,18 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Windows.Input;
 using CityMap.Models;
+using MvvmCross.Commands;
+using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
+using Plugin.Connectivity.Abstractions;
 
 namespace CityMap.ViewModels
 {
 	public class CityDescriptionViewModel : MvxViewModel<CityModel>
 	{
+		private readonly IMvxNavigationService _navigationService;
+
 		private CityModel _city;
+		private MvxCommand _showMapClickedCommand;
+
+		public CityDescriptionViewModel(IMvxNavigationService navigationService)
+		{
+			_navigationService = navigationService;
+		}
 
 		public override void Prepare(CityModel parameter)
 		{
-			// receive and store the parameter here
 			_city = parameter;
 		}
 
@@ -24,6 +32,20 @@ namespace CityMap.ViewModels
 				_city = value;
 				RaisePropertyChanged(() => City);
 			}
+		}
+
+		public ICommand ShowMapClickedCommand
+		{
+			get
+			{
+				_showMapClickedCommand = _showMapClickedCommand ?? new MvxCommand(DoSelectItem);
+				return _showMapClickedCommand;
+			}
+		}
+
+		private void DoSelectItem()
+		{
+			_navigationService.Navigate<CityLocationViewModel, CityModel>(City);
 		}
 	}
 }

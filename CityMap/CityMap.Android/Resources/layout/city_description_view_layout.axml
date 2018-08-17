@@ -9,7 +9,7 @@
         android:layout_height="190dp"
         android:id="@+id/DetailedimageView"
         android:scaleType="centerCrop"
-        local:MvxBind="Drawable City.Title, Converter=StringUrlToImage" />
+        local:MvxBind="Drawable City.Title, Converter=PathToImage" />
     <TextView
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"

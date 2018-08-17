@@ -22,7 +22,7 @@
                 android:layout_height="190dp"
                 android:id="@+id/imageView"
                 android:scaleType="centerCrop"
-                local:MvxBind="Drawable Title, Converter=StringUrlToImage" />
+                local:MvxBind="Drawable Title, Converter=PathToImage" />
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

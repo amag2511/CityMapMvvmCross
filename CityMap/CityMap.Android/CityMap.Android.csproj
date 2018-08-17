@@ -62,7 +62,7 @@
   <ItemGroup>
     <Compile Include="Controls\CityRecyclerViewAdapter.cs" />
     <Compile Include="Controls\CityRecyclerViewHolder.cs" />
-    <Compile Include="Converters\StringUrlToImageValueConverter.cs" />
+    <Compile Include="Converters\PathToImageValueConverter.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="SplashScreen.cs">
       <SubType>Code</SubType>
@@ -107,11 +107,29 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs">
+      <Version>7.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="AutoMapper">
+      <Version>7.0.1</Version>
+    </PackageReference>
     <PackageReference Include="MvvmCross">
       <Version>6.1.2</Version>
     </PackageReference>
     <PackageReference Include="MvvmCross.Droid.Support.V7.RecyclerView">
       <Version>6.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="MvvmCross.Plugin.File">
+      <Version>6.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="MvvmCross.Plugin.Network">
+      <Version>6.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>11.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugins.Settings">
+      <Version>3.1.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.CardView">

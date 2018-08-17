@@ -5,22 +5,12 @@ using MvvmCross.Converters;
 using MvvmCross.Platforms.Android;
 using System;
 using System.Globalization;
-using Acr.UserDialogs.Infrastructure;
-using Android.Content.Res;
-using Android.Support.V4.Content;
-using MvvmCross.Plugin.File;
+using System.IO;
 
 namespace CityMap.Android.Converters
 {
-	public class StringUrlToImageValueConverter : MvxValueConverter<string, Drawable>
+	public class PathToImageValueConverter : MvxValueConverter<string, Drawable>
 	{
-		private IMvxFileStore _fileStore;
-
-		public StringUrlToImageValueConverter()
-		{
-			_fileStore = Mvx.Resolve<IMvxFileStore>();
-		}
-
 		protected override Drawable Convert(
 			string value,
 			Type targetType,
@@ -29,15 +19,16 @@ namespace CityMap.Android.Converters
 		{
 			var currentActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
 
-			if (!_fileStore.Exists(value))
+			var fullPath = $"{currentActivity.FilesDir}/{value}";
+
+			if (!File.Exists(fullPath))
 			{
 				return currentActivity.GetDrawable(Resource.Drawable.DefaultImage);
 			}
 
-			var decodedByte = BitmapFactory.DecodeFile($"{currentActivity.FilesDir}/{value}");
+			var decodedByte = BitmapFactory.DecodeFile(fullPath);
 
 			return new BitmapDrawable(currentActivity.Resources, decodedByte);
-
 		}
 	}
 }

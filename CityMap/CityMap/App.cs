@@ -16,9 +16,9 @@ namespace CityMap
 			Mvx.RegisterType<IMapper, Mapper>();
 			Mvx.RegisterType<IImageLoaderService, ImageLoaderService>();
 
-			Mvx.RegisterSingleton<IWebApiClient>(() => new WebApiClient());
+			Mvx.LazyConstructAndRegisterSingleton<IWebApiClient>(() => new WebApiClient());
 
-			Mvx.RegisterSingleton(() => UserDialogs.Instance);
+			Mvx.LazyConstructAndRegisterSingleton(() => UserDialogs.Instance);
 
 			RegisterAppStart<CityListViewModel>();
 		}

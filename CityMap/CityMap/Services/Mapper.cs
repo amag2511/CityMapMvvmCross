@@ -11,6 +11,7 @@ namespace CityMap.Services
 		{
 			AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<CityDataModel, CityModel>());
 		}
+
 		public IEnumerable<CityModel> MapCollection(IEnumerable<CityDataModel> cityDataModels)
 		{
 			if (cityDataModels == null)

@@ -38,12 +38,12 @@ namespace CityMap.ViewModels
 		{
 			get
 			{
-				_showMapClickedCommand = _showMapClickedCommand ?? new MvxCommand(DoSelectItem);
+				_showMapClickedCommand = _showMapClickedCommand ?? new MvxCommand(DoShowMap);
 				return _showMapClickedCommand;
 			}
 		}
 
-		private void DoSelectItem()
+		private void DoShowMap()
 		{
 			_navigationService.Navigate<CityLocationViewModel, CityModel>(City);
 		}

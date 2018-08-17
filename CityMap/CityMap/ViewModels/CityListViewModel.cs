@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Acr.UserDialogs;
 using CityMap.Models;
 using CityMap.Services.Interfaces;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
-using System.Windows.Input;
-using Acr.UserDialogs;
-using MvvmCross;
 using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace CityMap.ViewModels
 {
@@ -22,6 +22,7 @@ namespace CityMap.ViewModels
 		private readonly IUserDialogs _userDialogs;
 
 		private MvxCommand<CityModel> _itemSelectedCommand;
+		private MvxCommand<CityModel> _navigateToMapCommand;
 		private IEnumerable<CityModel> _cities;
 
 		public CityListViewModel(
@@ -67,12 +68,26 @@ namespace CityMap.ViewModels
 			}
 		}
 
+		public ICommand NavigateToMapCommand
+		{
+			get
+			{
+				_navigateToMapCommand = _navigateToMapCommand ?? new MvxCommand<CityModel>(DoNavigateToMap);
+				return _navigateToMapCommand;
+			}
+		}
+
 		private async void OnCurrentConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
 		{
 			if (e.IsConnected)
 			{
 				await UpdateCityListAsync();
 			}
+		}
+
+		private void DoNavigateToMap(CityModel city)
+		{
+			_navigationService.Navigate<CityLocationViewModel, CityModel>(city);
 		}
 
 		private void DoSelectItem(CityModel city)
